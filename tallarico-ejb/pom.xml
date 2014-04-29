@@ -151,6 +151,7 @@
         </profile>
 
         <profile>
+            <!-- http://typea.info/blg/glob/2014/04/java-ee-7-1-wildfly-jboss-tools-ear-arquillian.html -->
             <id>arq-wildfly-managed</id>
             <dependencies>
 				<dependency>
@@ -177,6 +178,7 @@
         </profile>
 
         <profile>
+            <!-- http://typea.info/blg/glob/2014/04/java-ee-7-1-wildfly-jboss-tools-ear-arquillian.html -->
             <id>arq-wildfly-remote</id>
             <dependencies>
 				<dependency>

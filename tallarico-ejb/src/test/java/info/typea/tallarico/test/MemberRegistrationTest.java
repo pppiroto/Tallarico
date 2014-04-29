@@ -42,8 +42,12 @@ public class MemberRegistrationTest {
                 .addClasses(Member.class, MemberRegistration.class, Resources.class)
                 .addAsResource("META-INF/test-persistence.xml", "META-INF/persistence.xml")
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
+                //
                 // Deploy our test datasource
-                .addAsWebInfResource("test-ds.xml", "test-ds.xml");
+                //　http://typea.info/blg/glob/2014/04/java-ee-7-3-jpamysqlarquillian.html
+                //
+                //.addAsWebInfResource("test-ds.xml", "test-ds.xml")
+                ;
     }
 
     @Inject
