@@ -7,6 +7,7 @@ import info.typea.tallarico.model.Book;
 import info.typea.tallarico.service.BookService;
 import info.typea.tallarico.util.Resources;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -66,7 +67,7 @@ public class BookServiceTest {
 	    
 	    @Test
 	    public void insertBookTest() {
-	    	Book book = new Book("Insert Test",100f,"Test");
+	    	Book book = createTestBook((int)(Math.random() * 10));
 	    	bookService.insertBook(book);
 	    	log.info(book.toString());
 	    	assertNotNull(book.getId());
@@ -74,7 +75,7 @@ public class BookServiceTest {
 	    
 	    @Test
 	    public void findBookByIdTest() {
-	    	createTestData();
+	    	createTestData(5);
 
 	    	List<Book> allBooks = bookService.selectAllBooks();
 	    	int pos = (int)(Math.random() * 100d) % allBooks.size(); 
@@ -92,7 +93,7 @@ public class BookServiceTest {
 	    
 	    @Test
 	    public void selectBooksByTitleTest() {
-	    	createTestData();
+	    	createTestData(5);
 	    	
 	    	List<Book> books = bookService.selectBooksByTitle(SAMPLE_BOOK_TITLE_PREFIX);
 	    	for (Book book : books) {
@@ -103,7 +104,7 @@ public class BookServiceTest {
 	    
 	    @Test
 	    public void selectMoreExpensiveBooksTest() {
-	    	createTestData();
+	    	createTestData(5);
 	    	
 	    	final float BASE_PRICE = 300f;
 	    	
@@ -114,15 +115,91 @@ public class BookServiceTest {
 	    	}
 	    }
 	    
-	    private final String SAMPLE_BOOK_TITLE_PREFIX = "SampleBook";
-	    private void createTestData() {
-	    	for (int i=0; i<5; i++) {
-	    		bookService.insertBook(
-	    			new Book(
-	    				String.format("%s%02d", SAMPLE_BOOK_TITLE_PREFIX, i),
-	    				i * 100f,
-	    				String.format("Description about %s%02d.", SAMPLE_BOOK_TITLE_PREFIX, i))
-	    		);
+	    @Test
+	    public void selectBooksByCondition2Test() {
+	    	List<Book> sampleList = createTestData(10);
+	    	Book searchConditionSample = sampleList.get(5);
+	    	log.info(searchConditionSample.toString());
+	    	
+	    	int[] titleSubstr = {0,5};
+	    	int[] descSubstr = {2,6};
+	    	List<Book> books = bookService.selectBooksByCondition2(
+	    			searchConditionSample.getTitle().substring(titleSubstr[0],titleSubstr[1]), 
+	    			searchConditionSample.getPrice(), 
+	    			searchConditionSample.getDescription().substring(descSubstr[0],descSubstr[1]), 
+	    			searchConditionSample.getIsbn()
+	    	);
+	    
+	    	for (Book book : books) {
+	    		log.info(book.toString());
+	    		
+	    		assertEquals(
+	    				searchConditionSample.getTitle().substring(titleSubstr[0],titleSubstr[1]),
+	    				book.getTitle().substring(titleSubstr[0],titleSubstr[1]));
+	    		assertEquals(
+	    				searchConditionSample.getPrice(),
+	    				book.getPrice());
+	     		assertEquals(
+	     				searchConditionSample.getDescription().substring(descSubstr[0],descSubstr[1]),
+	     				book.getDescription().substring(descSubstr[0],descSubstr[1]));
+	    		assertEquals(
+	    				searchConditionSample.getIsbn(),
+	    				book.getIsbn());
 	    	}
+	    }
+	    
+	    @Test
+	    public void selectBooksByConditionTest() {
+	    	List<Book> sampleList = createTestData(10);
+	    	Book searchConditionSample = sampleList.get(5);
+	    	log.info(searchConditionSample.toString());
+	    	
+	    	int[] titleSubstr = {0,5};
+	    	int[] descSubstr = {2,6};
+	    	List<Book> books = bookService.selectBooksByCondition(
+	    			searchConditionSample.getTitle().substring(titleSubstr[0],titleSubstr[1]), 
+	    			searchConditionSample.getPrice(), 
+	    			searchConditionSample.getDescription().substring(descSubstr[0],descSubstr[1]), 
+	    			searchConditionSample.getIsbn());
+	    
+	    	for (Book book : books) {
+	    		log.info(book.toString());
+	    		
+	    		assertEquals(
+	    				searchConditionSample.getTitle().substring(titleSubstr[0],titleSubstr[1]),
+	    				book.getTitle().substring(titleSubstr[0],titleSubstr[1]));
+	    		assertEquals(
+	    				searchConditionSample.getPrice(),
+	    				book.getPrice());
+	     		assertEquals(
+	     				searchConditionSample.getDescription().substring(descSubstr[0],descSubstr[1]),
+	     				book.getDescription().substring(descSubstr[0],descSubstr[1]));
+	    		assertEquals(
+	    				searchConditionSample.getIsbn(),
+	    				book.getIsbn());
+	    	}
+	    }
+	    
+	    
+	    private final String SAMPLE_BOOK_TITLE_PREFIX = "SampleBook";
+	    private List<Book> createTestData(int size) {
+	    	List<Book> inserted = new ArrayList<Book>();
+	    	for (int i=0; i<size; i++) {
+	    		Book book = createTestBook(i);
+	    		inserted.add(book);
+	    		bookService.insertBook(book);
+	    	}
+	    	
+	    	return inserted;
+	    }
+	    private Book createTestBook(int seed) {
+	    	return new Book(
+    				String.format("%s%02d", SAMPLE_BOOK_TITLE_PREFIX, seed),
+    				seed * 100f,
+    				String.format("Description about %s%02d.", SAMPLE_BOOK_TITLE_PREFIX, seed),
+    				String.format("isbn-%05d",seed),
+    				(int)(Math.random() * 100d),
+    				(seed % 2 == 0)
+    			);
 	    }
 }
