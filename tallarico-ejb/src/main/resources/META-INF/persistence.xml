@@ -25,11 +25,11 @@
          data source, this example data source is just for development and testing! -->
       <!-- The datasource is deployed as <EAR>/META-INF/tallarico-ds.xml, you
          can find it in the source at ear/src/main/application/META-INF/tallarico-ds.xml -->
-      <jta-data-source>java:jboss/datasources/tallaricoDS</jta-data-source>
+      <jta-data-source>java:jboss/datasources/TallaricoDS</jta-data-source>
       <properties>
-         <!-- Properties for Hibernate -->
-         <property name="hibernate.hbm2ddl.auto" value="create-drop" />
-         <property name="hibernate.show_sql" value="false" />
+         <property name="hibernate.hbm2ddl.auto" value="validate" /><!-- http://docs.jboss.org/hibernate/core/3.3/reference/en/html/session-configuration.html -->
+         <property name="hibernate.show_sql" value="true" />
+         <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
       </properties>
    </persistence-unit>
 </persistence>
