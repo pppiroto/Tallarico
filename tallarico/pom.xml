@@ -63,7 +63,11 @@
             maven repository. -->
         <!-- <version.jboss.bom>1.0.4.Final-redhat-4</version.jboss.bom>> -->
 
-        <version.jboss.as>7.2.0.Final</version.jboss.as>
+        
+        <!-- https://community.jboss.org/thread/234629 -->        
+        <!-- version.jboss.as>7.2.0.Final</version.jboss.as>  -->
+        <version.jboss.as>8.0.0.Final</version.jboss.as>
+        
         <!-- Alternatively, comment out the above line, and un-comment the 
             line below to use version 7.2.0.Final-redhat-8 which is a release certified 
             to work with JBoss EAP 6. It requires you have access to the JBoss EAP 6 
@@ -77,8 +81,12 @@
         <version.war.plugin>2.1.1</version.war.plugin>
 
         <!-- maven-compiler-plugin -->
+		<!-- 
         <maven.compiler.target>1.6</maven.compiler.target>
         <maven.compiler.source>1.6</maven.compiler.source>
+ 		-->
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.source>1.7</maven.compiler.source>
     </properties>
 
     <dependencyManagement>
