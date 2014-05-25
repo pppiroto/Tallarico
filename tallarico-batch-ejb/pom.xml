@@ -56,6 +56,13 @@
             <scope>provided</scope>
         </dependency>
 
+		<dependency> 
+		    <groupId>javax.batch</groupId> 
+		    <artifactId>javax.batch-api</artifactId> 
+		    <version>1.0</version> 
+            <scope>provided</scope>
+		</dependency> 
+
         <!-- Import the JPA API, we use provided scope as the API is included in JBoss AS 7 -->
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
@@ -149,7 +156,20 @@
                 </dependency>
             </dependencies>
         </profile>
-
+        
+        <profile>
+            <!-- http://typea.info/blg/glob/2014/04/java-ee-7-1-wildfly-jboss-tools-ear-arquillian.html -->
+            <id>arq-wildfly-managed</id>
+            <dependencies>
+				<dependency>
+					<groupId>org.wildfly</groupId>
+					<artifactId>wildfly-arquillian-container-managed</artifactId>
+					<version>8.0.0.Final</version>
+					<scope>test</scope>
+				</dependency>
+            </dependencies>
+        </profile>
+        
         <profile>
             <!-- An optional Arquillian testing profile that executes tests 
                 in a remote JBoss AS instance -->
@@ -163,7 +183,19 @@
                 </dependency>
             </dependencies>
         </profile>
-
+        
+        <profile>
+            <!-- http://typea.info/blg/glob/2014/04/java-ee-7-1-wildfly-jboss-tools-ear-arquillian.html -->
+            <id>arq-wildfly-remote</id>
+            <dependencies>
+				<dependency>
+					<groupId>org.wildfly</groupId>
+					<artifactId>wildfly-arquillian-container-remote</artifactId>
+					<version>8.0.0.Final</version>
+					<scope>test</scope>
+				</dependency>
+			</dependencies>
+        </profile>
     </profiles>
 
 </project>
