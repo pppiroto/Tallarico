@@ -124,6 +124,12 @@
                 <scope>import</scope>
             </dependency>
 
+            <dependency>
+            	<groupId>info.typea.tallarico</groupId>
+            	<artifactId>tallarico-ejb</artifactId>
+            	<version>${project.version}</version>
+            	<type>ejb</type>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

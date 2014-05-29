@@ -50,6 +50,11 @@
             <artifactId>tallarico-batch-ejb</artifactId>
             <type>ejb</type>
         </dependency>
+        <dependency>
+        	<groupId>info.typea.tallarico</groupId>
+        	<artifactId>tallarico-ejb</artifactId>
+        	<type>ejb</type>
+        </dependency>
     </dependencies>
 
     <build>
