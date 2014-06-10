@@ -1,7 +1,8 @@
 package info.typea.tallarico.test.job;
 
+import info.typea.tallarico.job.util.BatchResource;
+import info.typea.tallarico.job.util.Resources;
 import info.typea.tallarico.test.util.BatchTestHelper;
-import info.typea.tallarico.util.Resources;
 
 import java.util.List;
 import java.util.Map;
@@ -42,6 +43,7 @@ public class SimpleJobTest {
 	}
 	
 	@Inject
+	@BatchResource
 	Logger logger;
 	
 	@Test

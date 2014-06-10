@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- http://docs.oracle.com/javaee/7/tutorial/doc/batch-processing003.htm -->
+<job id="simplejob" xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+                    version="1.0">
+
+  <properties>
+    <property name="input_file" value="c:\work\test.txt"/>
+    <property name="output_file" value="c:\work\test_out.txt"/>
+  </properties>
+  
+  <step id="mychunk" next="mytask">
+    <chunk>
+      <reader ref="MyReader"></reader>
+      <processor ref="MyProcessor"></processor>
+      <writer ref="MyWriter"></writer>
+    </chunk>
+  </step>
+  <step id="mytask">
+    <batchlet ref="MyBatchlet"></batchlet>
+    <end on="COMPLETED"/>
+  </step>
+</job>
